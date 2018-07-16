@@ -1,12 +1,11 @@
-package ru.agronomych.bell_project.user.controller;
+package ru.agronomych.bellProject.user.controller;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.agronomych.bell_project.user.model.User;
-import ru.agronomych.bell_project.user.service.UserService;
-import ru.agronomych.bell_project.user.view.UserView;
+import ru.agronomych.bellProject.user.model.User;
+import ru.agronomych.bellProject.user.service.UserService;
+import ru.agronomych.bellProject.user.view.UserView;
 
 import java.util.List;
 
@@ -26,15 +25,16 @@ public class UserController {
     @ApiOperation(value = "getUsers", nickname = "getUsers", httpMethod = "POST")
     @PostMapping("/list")
     public void users(@RequestBody List<UserView> users) {
+        List<User>
         for(User user:users){
 
         }
     };
 
-    @ApiOperation(value = "id", nickname = "id",httpMethod = "GET")
+    /*@ApiOperation(value = "id", nickname = "id",httpMethod = "GET")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not found"),
-            @ApiResponse(code = 500, message = "Failed")});
-    @GetMapping
+            @ApiResponse(code = 500, message = "Failed")});*/
+    //@GetMapping
 }

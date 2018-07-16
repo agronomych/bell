@@ -1,9 +1,10 @@
-package ru.agronomych.bell_project.docs.model;
+package ru.agronomych.bellProject.countries.model;
 
 import javax.persistence.*;
 
 @Entity
-public class Doc {
+@Table (name = "Countries")
+public class Country {
 
     @Id
     private Integer code;

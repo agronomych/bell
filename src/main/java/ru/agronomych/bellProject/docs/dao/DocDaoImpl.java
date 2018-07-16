@@ -1,8 +1,7 @@
-package ru.agronomych.bell_project.docs.dao;
+package ru.agronomych.bellProject.docs.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import ru.agronomych.bell_project.docs.model.Doc;
+import ru.agronomych.bellProject.docs.model.Doc;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

@@ -1,8 +1,8 @@
-package ru.agronomych.bell_project.countries.dao;
+package ru.agronomych.bellProject.countries.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.agronomych.bell_project.countries.model.Country;
+import ru.agronomych.bellProject.countries.model.Country;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

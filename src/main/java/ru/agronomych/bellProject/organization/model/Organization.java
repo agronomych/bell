@@ -1,4 +1,4 @@
-package ru.agronomych.bell_project.organization.model;
+package ru.agronomych.bellProject.organization.model;
 
 import javax.persistence.*;
 

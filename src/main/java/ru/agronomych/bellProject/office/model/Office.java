@@ -1,6 +1,6 @@
-package ru.agronomych.bell_project.office.model;
+package ru.agronomych.bellProject.office.model;
 
-import ru.agronomych.bell_project.user.model.User;
+import ru.agronomych.bellProject.user.model.User;
 
 import javax.persistence.*;
 import java.util.List;

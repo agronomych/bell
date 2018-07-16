@@ -1,6 +1,6 @@
-package ru.agronomych.bell_project.docs.dao;
+package ru.agronomych.bellProject.docs.dao;
 
-import ru.agronomych.bell_project.docs.model.Doc;
+import ru.agronomych.bellProject.docs.model.Doc;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package ru.agronomych.bell_project.countries.dao;
+package ru.agronomych.bellProject.countries.dao;
 
-import ru.agronomych.bell_project.countries.model.Country;
+import ru.agronomych.bellProject.countries.model.Country;
 
 import java.util.List;
 

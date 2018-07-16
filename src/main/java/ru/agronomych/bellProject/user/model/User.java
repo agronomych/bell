@@ -1,6 +1,6 @@
-package ru.agronomych.bell_project.user.model;
+package ru.agronomych.bellProject.user.model;
 
-import ru.agronomych.bell_project.office.model.Office;
+import ru.agronomych.bellProject.office.model.Office;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -50,6 +50,10 @@ public class User {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private Office office;
+
+    public User(){
+
+    }
 
     public Integer getOfficeId() {
         return officeId;

@@ -1,6 +1,6 @@
-package ru.agronomych.bell_project.user.dao;
+package ru.agronomych.bellProject.user.dao;
 
-import ru.agronomych.bell_project.user.model.User;
+import ru.agronomych.bellProject.user.model.User;
 
 import java.util.List;
 
