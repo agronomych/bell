@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.agronomych.bell_project.user.model.User;
+import ru.agronomych.bell_project.user.service.UserService;
+import ru.agronomych.bell_project.user.view.UserView;
 
 import java.util.List;
 
@@ -24,8 +26,7 @@ public class UserController {
     @ApiOperation(value = "getUsers", nickname = "getUsers", httpMethod = "POST")
     @PostMapping("/list")
     public void users(@RequestBody List<UserView> users) {
-        List<Users>
-        for(user UserView:users){
+        for(User user:users){
 
         }
     };
