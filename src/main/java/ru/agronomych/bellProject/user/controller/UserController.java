@@ -3,8 +3,7 @@ package ru.agronomych.bellProject.user.controller;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.agronomych.bellProject.user.model.User;
-import ru.agronomych.bellProject.user.service.UserService;
+import ru.agronomych.bellProject.user.service.UserServiceImpl;
 import ru.agronomych.bellProject.user.view.UserView;
 
 import java.util.List;
@@ -15,18 +14,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/user/", produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
-    public final UserService userService;
+    public final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserServiceImpl userService){
         this.userService = userService;
     }
 
     @ApiOperation(value = "getUsers", nickname = "getUsers", httpMethod = "POST")
     @PostMapping("/list")
     public void users(@RequestBody List<UserView> users) {
-        List<User>
-        for(User user:users){
+        List<UserView> allUsers;
+        for(UserView user:users){
 
         }
     };

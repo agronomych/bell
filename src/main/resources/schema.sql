@@ -1,3 +1,4 @@
+--Making new schema if not exists
 CREATE SCHEMA IF NOT EXISTS bell;
 USE bell;
 
@@ -15,7 +16,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`offices`
+-- Table `bell`.`offices`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Offices` (
   `id` INT NOT NULL AUTO_INCREMENT,

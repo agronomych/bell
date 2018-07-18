@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserDao {
 
     /**
-     * Получить всех user
+     * Получить всех user для списка
      */
     List<User> all();
 
@@ -20,4 +20,9 @@ public interface UserDao {
      * Сохранить user
      */
     void save(User user);
+
+    /**
+     * Сохранить user
+     */
+    void update(User user);
 }
