@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table
 public class User {
 
     @Id
@@ -30,20 +29,16 @@ public class User {
 
     private String position;
 
-    private Integer docCode;
+    private Integer citizenshipId;
 
-    private Integer citizenshipCode;
+    private  Integer docId;
 
     private String phone;
-
-    private String docName;
 
     private String docNumber;
 
     @Temporal(TemporalType.DATE)
     private java.util.Date docDate;
-
-    private String citizenshipName;
 
     private Boolean isIdentified;
 
@@ -95,20 +90,20 @@ public class User {
         this.position = position;
     }
 
-    public Integer getDocCode() {
-        return docCode;
+    public Integer getCitizenshipId() {
+        return citizenshipId;
     }
 
-    public void setDocCode(Integer docCode) {
-        this.docCode = docCode;
+    public void setCitizenshipId(Integer citizenshipId) {
+        this.citizenshipId = citizenshipId;
     }
 
-    public Integer getCitizenshipCode() {
-        return citizenshipCode;
+    public Integer getDocId() {
+        return docId;
     }
 
-    public void setCitizenshipCode(Integer citizenshipCode) {
-        this.citizenshipCode = citizenshipCode;
+    public void setDocId(Integer docId) {
+        this.docId = docId;
     }
 
     public String getPhone() {
@@ -117,14 +112,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getDocName() {
-        return docName;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
     }
 
     public String getDocNumber() {
@@ -143,19 +130,19 @@ public class User {
         this.docDate = docDate;
     }
 
-    public String getCitizenshipName() {
-        return citizenshipName;
-    }
-
-    public void setCitizenshipName(String citizenshipName) {
-        this.citizenshipName = citizenshipName;
-    }
-
     public Boolean getIdentified() {
         return isIdentified;
     }
 
     public void setIdentified(Boolean identified) {
         isIdentified = identified;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 }

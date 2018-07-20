@@ -5,12 +5,17 @@ import org.springframework.stereotype.Repository;
 import ru.agronomych.bellProject.user.model.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
+    @PersistenceContext
     private final EntityManager em;
 
     @Autowired
@@ -23,12 +28,19 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public List<User> all(){
-        TypedQuery<User> query = em.createQuery("SELECT h FROM User h", User.class);
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery cQuery = builder.createQuery();
+        cQuery.from(User.class);
+        Query query = em.createQuery(cQuery);
         return query.getResultList();
     }
 
     @Override
     public User loadById(int id){
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery cQuery = builder.createQuery();
+        Root users = cQuery.from(User.class);
+        cQuery.where(builder.equal(users.get("id"), id));
         return em.find(User.class, id);
     }
 
@@ -39,6 +51,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user){
+        /*CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaUpdate<User> cUpdate = ;
+        Root users = cUpdate.from(User.class);
 
+
+        CriteriaQuery<User> userCriteria = builder.createQuery(User.class);*/
     }
 }
