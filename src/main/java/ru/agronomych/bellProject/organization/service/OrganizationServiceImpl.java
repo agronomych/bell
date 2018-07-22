@@ -22,12 +22,12 @@ public class OrganizationServiceImpl implements OrganizationService{
     }
 
     @Override
-    public void saveUser(OrganizationView organization){
+    public void saveOrganization(OrganizationView organization){
 
     }
 
     @Override
-    public void updateUser(OrganizationView organization){
+    public void updateOrganization(OrganizationView organization){
 
     }
 

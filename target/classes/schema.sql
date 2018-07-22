@@ -1,29 +1,48 @@
+/*
+Генерация новой схемы БД
+*/
+
 CREATE SCHEMA IF NOT EXISTS bell;
 USE bell;
 
+/*
+Генерация таблицы для организаций
+name - краткое наименование организации
+inn - ИНН
+isActive - является ли организация действующей
+fullName - полное наименование оргазации
+kpp - КПП
+address - адрес организации
+phone - телефон организации
+*/
 CREATE TABLE IF NOT EXISTS `Organizations` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `inn` VARCHAR(45) NULL,
+  `name` VARCHAR(100) NULL,
+  `inn` VARCHAR(100) NULL,
   `isActive` TINYINT NULL,
-  `fullName` VARCHAR(45) NULL,
-  `kpp` VARCHAR(45) NULL,
-  `address` VARCHAR(45) NULL,
-  `phone` VARCHAR(45) NULL,
+  `fullName` VARCHAR(100) NULL,
+  `kpp` VARCHAR(100) NULL,
+  `address` VARCHAR(100) NULL,
+  `phone` VARCHAR(100) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `mydb`.`offices`
--- -----------------------------------------------------
+/*
+Генерация таблицы для офисов
+orgId - id организации, которой принадлежит офис
+name - наименование офиса
+phone - номер телефона офиса
+isActive - является ли офис действующим
+address - адрес офиса
+*/
 CREATE TABLE IF NOT EXISTS `Offices` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `orgId` INT NULL,
-  `name` VARCHAR(45) NULL,
-  `phone` VARCHAR(45) NULL,
+  `name` VARCHAR(100) NULL,
+  `phone` VARCHAR(100) NULL,
   `isActive` TINYINT NULL,
-  `address` VARCHAR(45) NULL,
+  `address` VARCHAR(100) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `orgId`
     FOREIGN KEY (`orgId`)
@@ -35,43 +54,59 @@ ENGINE = InnoDB;
 CREATE INDEX `orgId_idx` ON `Offices` (`orgId` ASC);
 
 
--- -----------------------------------------------------
--- Table `mydb`.`Docs`
--- -----------------------------------------------------
+/*
+Генерация таблицы-справочника для видов документов (код и наименование документа)
+code - код документа
+name - наименование документа
+*/
 CREATE TABLE IF NOT EXISTS `Docs` (
-  `code` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NULL,
-  PRIMARY KEY (`code`))
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code` INT NOT NULL default 0,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `mydb`.`Countries`
--- -----------------------------------------------------
+/*
+Генерация таблицы-справочника для стран (код и название страны)
+code - код страны
+name - название страны
+*/
 CREATE TABLE IF NOT EXISTS `Countries` (
-  `code` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  PRIMARY KEY (`code`))
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code` INT NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `mydb`.`users`
--- -----------------------------------------------------
+/*
+Генерация таблицы-справочника для пользователей
+id - уникальный идентификатор
+officeId - идентификатор офиса, где работает пользователь
+firstName - имя
+lastName - фамилия
+middleName - отчество
+position  должность
+docId - id!!! документа из таблицы-справочника видов документов
+citizenshipId - id!!! документа из таблицы-справочника стран
+phone - номер телефона
+docNumber - номер документа
+docDate - дата выдачи документа
+isIdentified - пользователь идентифицирован
+*/
 CREATE TABLE IF NOT EXISTS `Users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `officeId` INT NULL,
-  `firstName` VARCHAR(45) NULL,
-  `lastName` VARCHAR(45) NULL,
-  `middleName` VARCHAR(45) NULL,
-  `position` VARCHAR(45) NULL,
-  `docCode` INT NULL,
-  `citizenshipCode` INT NULL,
-  `phone` VARCHAR(45) NULL,
-  `docName` VARCHAR(45) NULL,
-  `docNumber` VARCHAR(45) NULL,
-  `docDate` DATE,
-  `citizenshipName` VARCHAR(45) NULL,
+  `firstName` VARCHAR(100) NULL,
+  `lastName` VARCHAR(100) NULL,
+  `middleName` VARCHAR(100) NULL,
+  `position` VARCHAR(100) NULL,
+  `docId` INT NULL default 0,
+  `citizenshipId` INT NULL default 0,
+  `phone` VARCHAR(100) NULL,
+  `docNumber` VARCHAR(100) NULL,
+  `docDate` VARCHAR(100) NULL,
   `isIdentified` TINYINT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `officeId`
@@ -79,20 +114,20 @@ CREATE TABLE IF NOT EXISTS `Users` (
     REFERENCES `Offices` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `docCode`
-    FOREIGN KEY (`docCode`)
-    REFERENCES `Docs` (`code`)
+  CONSTRAINT `docId`
+    FOREIGN KEY (`docId`)
+    REFERENCES `Docs` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `citizenshipCode`
-    FOREIGN KEY (`citizenshipCode`)
-    REFERENCES `Countries` (`code`)
+  CONSTRAINT `citizenshipId`
+    FOREIGN KEY (`citizenshipId`)
+    REFERENCES `Countries` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE INDEX `officeId_idx` ON `Users` (`officeId` ASC);
 
-CREATE INDEX `docCode_idx` ON `Users` (`docCode` ASC);
+CREATE INDEX `docId_idx` ON `Users` (`docId` ASC);
 
-CREATE INDEX `citizenshipCode_idx` ON `Users` (`citizenshipCode` ASC);
+CREATE INDEX `citizenshipId_idx` ON `Users` (`citizenshipId` ASC);

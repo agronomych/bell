@@ -1,5 +1,7 @@
-SET NAMES 'cp866';
 
+SET NAMES 'cp866'; #Выбор кодировки для правильного восприятия русских символов
+
+INSERT INTO docs (code, name) VALUES (0,'Документ отсутствует');
 INSERT INTO docs (code, name) VALUES (1,'Паспорт РФ');
 INSERT INTO docs (code, name) VALUES (2,'Загранпаспорт');
 INSERT INTO docs (code, name) VALUES (3,'Военный билет');
@@ -7,6 +9,7 @@ INSERT INTO docs (code, name) VALUES (4,'Водительское удостов
 INSERT INTO docs (code, name) VALUES (5,'Удостоверение офицера МО');
 INSERT INTO docs (code, name) VALUES (6,'СНИЛС');
 
+INSERT INTO countries (code, name) VALUES (0,'Гражданство отсутствует');
 INSERT INTO countries (code, name) VALUES (1,'Россия');
 INSERT INTO countries (code, name) VALUES (2,'Белоруссия');
 INSERT INTO countries (code, name) VALUES (3,'Китай');
@@ -32,24 +35,21 @@ INSERT INTO offices (orgId, name, phone, isActive, address)
 INSERT INTO offices (orgId, name, phone, isActive, address)
   VALUES (3,'Переговорка','+78452951754',true,'Саратов, ул. Шелковичная, д. 11 оф. 13');
 
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (1,'Антон','Суряпин','Александрович','Директор',1,1,'89061490174','6304123456','2004-11-19',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (2,'Елена','Иманова','Александровна','Заместитель директора',1,1,'89061490173','6304123465','2011-10-11',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (1,'Альваро','Мехиа','','Водитель',2,6,'89171234567','111222333','1999-05-11',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (3,'Дмитрий','Можаров','Николаевич','Начальник отдела маркетинга',1,1,'89031564574','6304179456','2004-05-25',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (4,'Кокунов','Роман','Игоревич','Начальник СБ',5,2,'89041112223','5551313','1998-10-12',false);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (4,'Пак','Юджи','Свон','Директор',2,4,'89995656398','4449876','2008-08-30',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (4,'Мэй','В-ши','Свон','Заместитель директора',2,5,'89999638521','5551555','2009-01-15',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (5,'Сунь','Пунь','Чунь','Директор',2,3,'89033353353','91959195','2001-02-08',true);
-INSERT INTO Users (officeId, firstName, lastName, middleName, position, docCode, citizenshipCode, phone, docNumber, docDate, isIdentified)
-  VALUES (5,'Иван','Миронов','Андреевич','Уборщик',3,1,'89048759864','6304548659','2002-19-19',false);
-
-UPDATE users JOIN docs on users.docCode=docs.code SET users.docName=docs.Name;
-UPDATE users JOIN countries on users.docCode=countries.code SET users.citizenshipName=countries.name;
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (1,'Антон','Суряпин','Александрович','Директор',2,2,'89061490174','6304123456','2004-11-19',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (2,'Елена','Иманова','Александровна','Заместитель директора',2,2,'89061490173','6304123465','2011-10-11',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (1,'Альваро','Мехиа','','Водитель',3,7,'89171234567','111222333','1999-05-11',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (3,'Дмитрий','Можаров','Николаевич','Начальник отдела маркетинга',2,2,'89031564574','6304179456','2004-05-25',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (4,'Кокунов','Роман','Игоревич','Начальник СБ',6,3,'89041112223','5551313','1998-10-12',false);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (4,'Пак','Юджи','Свон','Директор',3,5,'89995656398','4449876','2008-08-30',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (4,'Мэй','В-ши','Свон','Заместитель директора',3,6,'89999638521','5551555','2009-01-15',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (5,'Сунь','Пунь','Чунь','Директор',3,4,'89033353353','91959195','2001-02-08',true);
+INSERT INTO Users (officeId, firstName, lastName, middleName, position, docId, citizenshipId, phone, docNumber, docDate, isIdentified)
+  VALUES (5,'Иван','Миронов','Андреевич','Уборщик',4,2,'89048759864','6304548659','2002-19-19',false);

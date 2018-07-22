@@ -14,6 +14,8 @@ public class OfficeView {
 
     public Boolean isActive;
 
+    public Integer orgId;
+
     @Override
     public String toString(){
         return name+" "+address+" "+phone;

@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -49,11 +50,19 @@ public class OrganizationDaoImpl implements OrganizationDao{
 
     @Override
     public void update(Organization organization){
-        /*CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaUpdate<Organization> cUpdate = ;
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaUpdate<Organization> cUpdate = builder.createCriteriaUpdate(Organization.class);
         Root organizations = cUpdate.from(Organization.class);
+        cUpdate.where(builder.equal(organizations.get("id"),organization.getId()));
+        if (organization.getActive()!=null) cUpdate.set("isActive",organization.getActive());
+        if (organization.getPhone()!=null) cUpdate.set("phone",organization.getPhone());
+        if (organization.getAddress()!=null) cUpdate.set("address",organization.getAddress());
+        if (organization.getName()!=null) cUpdate.set("name",organization.getName());
+        if (organization.getFullName()!=null) cUpdate.set("fullName",organization.getFullName());
+        if (organization.getInn()!=null) cUpdate.set("inn",organization.getInn());
+        if (organization.getKpp()!=null) cUpdate.set("kpp",organization.getKpp());
 
-
-        CriteriaQuery<Organization> organizationCriteria = builder.createQuery(Organization.class);*/
+        Query query = em.createQuery(cUpdate);
+        query.executeUpdate();
     }
 }

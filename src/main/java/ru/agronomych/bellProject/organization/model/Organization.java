@@ -92,4 +92,8 @@ public class Organization {
     public void setActive(Boolean active) {
         isActive = active;
     }
+
+    public Integer getId() {
+        return id;
+    }
 }

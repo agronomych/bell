@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -39,7 +40,9 @@ public class OfficeDaoImpl implements OfficeDao {
         CriteriaQuery cQuery = builder.createQuery();
         Root offices = cQuery.from(Office.class);
         cQuery.where(builder.equal(offices.get("id"), id));
-        return em.find(Office.class, id);
+        Query query = em.createQuery(cQuery);
+        return (Office) query.getSingleResult();
+        //return em.find(Office.class, id);
     }
 
     @Override
@@ -49,11 +52,17 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void update(Office office){
-        /*CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaUpdate<Office> cUpdate = ;
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaUpdate<Office> cUpdate = builder.createCriteriaUpdate(Office.class);
         Root offices = cUpdate.from(Office.class);
+        cUpdate.where(builder.equal(offices.get("id"),office.getId()));
+        if (office.getActive()!=null) cUpdate.set("isActive",office.getActive());
+        if (office.getPhone()!=null) cUpdate.set("phone",office.getPhone());
+        if (office.getAddress()!=null) cUpdate.set("address",office.getAddress());
+        if (office.getName()!=null) cUpdate.set("name",office.getName());
+        if (office.getOrgId()!=null) cUpdate.set("orgId",office.getOrgId());
 
-
-        CriteriaQuery<Office> officeCriteria = builder.createQuery(Office.class);*/
+        Query query = em.createQuery(cUpdate);
+        query.executeUpdate();
     }
 }

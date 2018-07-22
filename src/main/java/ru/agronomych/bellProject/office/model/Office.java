@@ -22,6 +22,8 @@ public class Office {
 
     private Integer orgId;
 
+    private String name;
+
     private String phone;
 
     private Boolean isActive;
@@ -65,5 +67,13 @@ public class Office {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

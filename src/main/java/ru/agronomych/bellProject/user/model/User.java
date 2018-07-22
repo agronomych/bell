@@ -138,11 +138,7 @@ public class User {
         isIdentified = identified;
     }
 
-    public Office getOffice() {
-        return office;
-    }
-
-    public void setOffice(Office office) {
-        this.office = office;
+    public Integer getId() {
+        return id;
     }
 }
