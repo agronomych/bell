@@ -16,19 +16,15 @@ public class UserView {
 
     public String position;
 
-    public Integer docCode;
+    public Integer docId;
 
-    public Integer citizenshipCode;
+    public Integer citizenshipId;
 
     public String phone;
-
-    public String docName;
 
     public String docNumber;
     
     public java.util.Date docDate;
-
-    public String citizenshipName;
 
     public Boolean isIdentified;
 

@@ -1,9 +1,11 @@
 package ru.agronomych.bellProject.office.service;
 
+import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.agronomych.bellProject.office.dao.OfficeDao;
 import ru.agronomych.bellProject.office.model.Office;
 import ru.agronomych.bellProject.office.view.OfficeView;
+import ma.glasnost.orika.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -28,37 +30,17 @@ public class OfficeServiceImpl implements OfficeService{
 
     @Override
     public void saveOffice(OfficeView officeView){
-        Office office = new Office();
-        if (officeView.isActive!=null) office.setActive(officeView.isActive);
-        if (officeView.address!=null) office.setAddress(officeView.address);
-        if (officeView.name!=null) office.setName(officeView.name);
-        if (officeView.orgId!=null) office.setOrgId(officeView.orgId);
-        if (officeView.phone!=null) office.setPhone(officeView.phone);
-        officeDao.save(office);
+        officeDao.save(ViewToOffice(officeView));
     }
 
     @Override
     public void updateOffice(OfficeView officeView){
-        Office office = new Office();
-        if (officeView.isActive!=null) office.setActive(officeView.isActive);
-        if (officeView.address!=null) office.setAddress(officeView.address);
-        if (officeView.name!=null) office.setName(officeView.name);
-        if (officeView.orgId!=null) office.setOrgId(officeView.orgId);
-        if (officeView.phone!=null) office.setPhone(officeView.phone);
-        officeDao.update(office);
+        officeDao.update(ViewToOffice(officeView));
     }
 
     @Override
     public OfficeView loadById(int id){
-        Office office;
-        OfficeView view = null;
-        office = officeDao.loadById(id);
-        if (office.getActive()!=null) view.isActive = office.getActive();
-        if (office.getOrgId()!=null) view.orgId = office.getOrgId();
-        if (office.getName()!=null) view.name = office.getName();
-        if (office.getPhone()!=null) view.phone = office.getPhone();
-        if (office.getAddress()!=null) view.address = office.getAddress();
-        return view;
+        return OfficeToView(officeDao.loadById(id));
     }
 
     private Function<Office,OfficeView> mapOffice(){
@@ -70,5 +52,19 @@ public class OfficeServiceImpl implements OfficeService{
             view.orgId = o.getOrgId();
             return view;
         };
+    }
+
+    private Office ViewToOffice(OfficeView view){
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory.classMap(OfficeView.class,Office.class);
+        MapperFacade mapper = mapperFactory.getMapperFacade();
+        return mapper.map(view,Office.class);
+    }
+
+    private OfficeView OfficeToView(Office office){
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory.classMap(OfficeView.class,Office.class);
+        MapperFacade mapper = mapperFactory.getMapperFacade();
+        return mapper.map(office,OfficeView.class);
     }
 }
