@@ -35,6 +35,9 @@ public class UserDaoImpl implements UserDao {
         return query.getResultList();
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public User loadById(int id){
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -44,11 +47,17 @@ public class UserDaoImpl implements UserDao {
         return em.find(User.class, id);
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void save(User user){
         em.persist(user);
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void update(User user){
         CriteriaBuilder builder = em.getCriteriaBuilder();

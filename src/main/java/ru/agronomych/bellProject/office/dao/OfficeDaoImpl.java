@@ -34,6 +34,9 @@ public class OfficeDaoImpl implements OfficeDao {
         return query.getResultList();
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public Office loadById(int id){
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -45,11 +48,17 @@ public class OfficeDaoImpl implements OfficeDao {
         //return em.find(Office.class, id);
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void save(Office office){
         em.persist(office);
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void update(Office office){
         CriteriaBuilder builder = em.getCriteriaBuilder();

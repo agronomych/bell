@@ -34,6 +34,9 @@ public class OrganizationDaoImpl implements OrganizationDao{
         return query.getResultList();
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public Organization loadById(int id){
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -43,11 +46,18 @@ public class OrganizationDaoImpl implements OrganizationDao{
         return em.find(Organization.class, id);
     }
 
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void save(Organization organization){
         em.persist(organization);
     }
 
+
+    /**
+     * {@InheritDoc}
+     */
     @Override
     public void update(Organization organization){
         CriteriaBuilder builder = em.getCriteriaBuilder();

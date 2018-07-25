@@ -12,17 +12,31 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/** Контроллер для объекта Office
+ * включает в себя следующее api:
+ * /list - возвращает список всех существующих офисов
+ * /save - сохраняет новый офис
+ * /update - обновляет данные офиса, обязательный параметр id
+ * /{id} - возвращает данные об офисе по его id
+ */
 @RestController
-@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/office", produces = APPLICATION_JSON_VALUE)
 public class OfficeController {
 
     private final OfficeService officeService;
 
+    /**
+     * Создаём объект OfficeService, который будет обрабатывать запросы
+     * @param officeService
+     */
     @Autowired
     public OfficeController(OfficeService officeService){
         this.officeService = officeService;
     }
 
+    /**
+     * Блок для /list, возвращает список офисов List<Office>
+     */
     @ApiOperation(value = "getOffices", nickname = "getOffices", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
@@ -33,28 +47,38 @@ public class OfficeController {
         offices = officeService.offices();
     };
 
-    //@RequestMapping("/save")
+    /**
+     * Блок для /save, сохраняет данные нового офиса
+     * @param view
+     */
     @ApiOperation(value = "saveOffice", nickname = "saveOffice", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/list")
-    public void saveOffice(@RequestBody OfficeView office) {
-        officeService.saveOffice(office);
+    @PostMapping("/save")
+    public void saveOffice(@RequestBody OfficeView view) {
+        officeService.saveOffice(view);
     };
 
-    //@RequestMapping("/update")
+    /**
+     * Блок для /update, обновляет данные нового офиса
+     * @param view
+     */
     @ApiOperation(value = "updateOffice", nickname = "updateOffice", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/list")
-    public void updateOffice(@RequestBody OfficeView office) {
-        officeService.updateOffice(office);
+    @PostMapping("/update")
+    public void updateOffice(@RequestBody OfficeView view) {
+        officeService.updateOffice(view);
     };
 
+    /**
+     * Блок для /{id}, возвращает данные офиса по id
+     * @param id
+     */
     @ApiOperation(value = "id", nickname = "id",httpMethod = "GET")
     @GetMapping("/")
     @RequestMapping(value = "/", method = RequestMethod.GET)

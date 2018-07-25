@@ -10,17 +10,31 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/** Контроллер для объекта Office
+ * включает в себя следующее api:
+ * /list - возвращает список всех существующих офисов
+ * /save - сохраняет новый офис
+ * /update - обновляет данные офиса, обязательный параметр id
+ * /{id} - возвращает данные об офисе по его id
+ */
 @RestController
 @RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
     private final UserService userService;
 
+    /**
+     * Создаём объект UserService, который будет обрабатывать запросы
+     * @param userService
+     */
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }
 
+    /**
+     * Блок для /list, возвращает список пользователей List<User>
+     */
     @ApiOperation(value = "getUsers", nickname = "getUsers", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
@@ -31,28 +45,38 @@ public class UserController {
         users = userService.users();
     };
 
-    //@RequestMapping("/save")
+    /**
+     * Блок для /save, сохраняет данные нового пользователя
+     * @param view
+     */
     @ApiOperation(value = "saveUser", nickname = "saveUser", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/list")
-    public void saveUser(@RequestBody UserView user) {
-        userService.saveUser(user);
+    @PostMapping("/save")
+    public void saveUser(@RequestBody UserView view) {
+        userService.saveUser(view);
     };
 
-    //@RequestMapping("/update")
+    /**
+     * Блок для /update, обновляет данные нового пользователя
+     * @param view
+     */
     @ApiOperation(value = "updateUser", nickname = "updateUser", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/list")
-    public void updateUser(@RequestBody UserView user) {
-        userService.updateUser(user);
+    @PostMapping("/update")
+    public void updateUser(@RequestBody UserView view) {
+        userService.updateUser(view);
     };
 
+    /**
+     * Блок для /{id}, возвращает данные пользователя по id
+     * @param id
+     */
     @ApiOperation(value = "id", nickname = "id",httpMethod = "GET")
     @GetMapping("/")
     @RequestMapping(value = "/", method = RequestMethod.GET)

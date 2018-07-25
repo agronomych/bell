@@ -1,48 +1,25 @@
-/*
-Генерация новой схемы БД
-*/
-
 CREATE SCHEMA IF NOT EXISTS bell;
 USE bell;
 
-/*
-Генерация таблицы для организаций
-name - краткое наименование организации
-inn - ИНН
-isActive - является ли организация действующей
-fullName - полное наименование оргазации
-kpp - КПП
-address - адрес организации
-phone - телефон организации
-*/
 CREATE TABLE IF NOT EXISTS `Organizations` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
-  `inn` VARCHAR(100) NULL,
-  `isActive` TINYINT NULL,
-  `fullName` VARCHAR(100) NULL,
-  `kpp` VARCHAR(100) NULL,
-  `address` VARCHAR(100) NULL,
-  `phone` VARCHAR(100) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT `Уникальный id`,
+  `name` VARCHAR(100) NULL COMMENT `краткое наименование организации`,
+  `inn` VARCHAR(100) NULL COMMENT `ИНН`,
+  `isActive` TINYINT NULL COMMENT `является ли организация действующей`,
+  `fullName` VARCHAR(100) NULL COMMENT `полное наименование оргазации`,
+  `kpp` VARCHAR(100) NULL COMMENT `КПП`,
+  `address` VARCHAR(100) NULL COMMENT `адрес организации`,
+  `phone` VARCHAR(100) NULL COMMENT `телефон организации`,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
-/*
-Генерация таблицы для офисов
-orgId - id организации, которой принадлежит офис
-name - наименование офиса
-phone - номер телефона офиса
-isActive - является ли офис действующим
-address - адрес офиса
-*/
 CREATE TABLE IF NOT EXISTS `Offices` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `orgId` INT NULL,
-  `name` VARCHAR(100) NULL,
-  `phone` VARCHAR(100) NULL,
-  `isActive` TINYINT NULL,
-  `address` VARCHAR(100) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT `Уникальный id`,
+  `orgId` INT COMMENT `id организации, которой принадлежит офис`,
+  `name` VARCHAR(100) NULL COMMENT `наименование офиса`,
+  `phone` VARCHAR(100) NULL COMMENT `номер телефона офиса`,
+  `isActive` TINYINT NULL COMMENT `является ли офис действующим`,
+  `address` VARCHAR(100) NULL COMMENT `адрес офиса`,
   PRIMARY KEY (`id`),
   CONSTRAINT `orgId`
     FOREIGN KEY (`orgId`)
@@ -53,61 +30,33 @@ ENGINE = InnoDB;
 
 CREATE INDEX `orgId_idx` ON `Offices` (`orgId` ASC);
 
-
-/*
-Генерация таблицы-справочника для видов документов (код и наименование документа)
-code - код документа
-name - наименование документа
-*/
 CREATE TABLE IF NOT EXISTS `Docs` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `code` INT NOT NULL default 0,
-  `name` VARCHAR(100) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT `Уникальный id`,
+  `code` INT NOT NULL default 0 COMMENT `code - код документа`,
+  `name` VARCHAR(100) NOT NULL COMMENT `name - наименование документа`,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
-/*
-Генерация таблицы-справочника для стран (код и название страны)
-code - код страны
-name - название страны
-*/
 CREATE TABLE IF NOT EXISTS `Countries` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `code` INT NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT `Уникальный id`,
+  `code` INT NOT NULL COMMENT `code - код страны`,
+  `name` VARCHAR(100) NOT NULL COMMENT `name - название страны`,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
-/*
-Генерация таблицы-справочника для пользователей
-id - уникальный идентификатор
-officeId - идентификатор офиса, где работает пользователь
-firstName - имя
-lastName - фамилия
-middleName - отчество
-position  должность
-docId - id!!! документа из таблицы-справочника видов документов
-citizenshipId - id!!! документа из таблицы-справочника стран
-phone - номер телефона
-docNumber - номер документа
-docDate - дата выдачи документа
-isIdentified - пользователь идентифицирован
-*/
 CREATE TABLE IF NOT EXISTS `Users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `officeId` INT NULL,
-  `firstName` VARCHAR(100) NULL,
-  `lastName` VARCHAR(100) NULL,
-  `middleName` VARCHAR(100) NULL,
-  `position` VARCHAR(100) NULL,
-  `docId` INT NULL default 0,
-  `citizenshipId` INT NULL default 0,
-  `phone` VARCHAR(100) NULL,
-  `docNumber` VARCHAR(100) NULL,
-  `docDate` VARCHAR(100) NULL,
-  `isIdentified` TINYINT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT `уникальный идентификатор`,
+  `officeId` INT NULL COMMENT `идентификатор офиса, где работает пользователь`,
+  `firstName` VARCHAR(100) NULL COMMENT `имя`,
+  `lastName` VARCHAR(100) NULL COMMENT `фамилия`,
+  `middleName` VARCHAR(100) NULL COMMENT `отчество`,
+  `position` VARCHAR(100) NULL COMMENT `должность`,
+  `docId` INT NULL default 0 COMMENT `id документа из таблицы-справочника видов документов`,
+  `citizenshipId` INT NULL default 0 COMMENT `id документа из таблицы-справочника стран`,
+  `phone` VARCHAR(100) NULL COMMENT `номер телефона`,
+  `docNumber` VARCHAR(100) NULL COMMENT `номер документа`,
+  `docDate` VARCHAR(100) NULL COMMENT `дата выдачи документа`,
+  `isIdentified` TINYINT NULL COMMENT `пользователь идентифицирован`,
   PRIMARY KEY (`id`),
   CONSTRAINT `officeId`
     FOREIGN KEY (`officeId`)
